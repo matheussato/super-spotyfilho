@@ -6,15 +6,20 @@ import jakarta.persistence.Persistence;
 import org.checkerframework.checker.units.qual.A;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("oracle");
         EntityManager manager = factory.createEntityManager();
 
-        //save(manager);
+        save(manager);
 
         manager.find(Musica.class, 1L);
+
+        String jqpl = "FROM Musica";
+        List<Musica> resultList = manager.createQuery(jqpl).getResultList();
+        resultList.forEach(System.out::println);
 
     }
 
